@@ -22,27 +22,30 @@
 
     <div class="container mb-5">
 
-<!-- STARTING SCREEN -->
+<!-- STARTING SCREEN: CHOOSE PLAYER -->
         <div class="row">
            <div class="col-md-12 text-center mb-5">
-              <h2><i class="fas fa-angle-double-right"></i> SELECT A PLAYER TO GET STARTED</h2>
+              <h2 id="start-message"><i class="fas fa-angle-double-right"></i> SELECT A PLAYER TO GET STARTED</h2>
            </div> 
         </div>
 
         <div class="row">
-           <div class="card-deck ml-5"></div>
+           <div class="card-deck ml-5" id="gameCharacters"></div>
         </div>
-    </div>
+    
 
   <!-- CHOOSE OPPONENTS -->
-    <div class="row">
-        <div class="col-md-12 text-center mb-5">
-            <h2><i class="fas fa-angle-double-right"></i> CHOOSE YOUR OPPONENT</h2>
-            <div id="opponent"></div>
-        </div> 
-    </div>
+        <!-- <div class="row">
+            <div class="col-md-12 text-center">
+                <h2><i class="fas fa-angle-double-right"></i> PREPARE TO ATTACK</h2>
+            </div> 
+        </div> -->
 
-  </section>
+        <!-- <div class="row">
+            <div class="card-deck ml-5" id="opponents"></div>
+        </div>
+    </div> -->
+    </section>
 
   <section id="gameplay-screen">
 <!-- HEALTH METER -->
@@ -68,6 +71,7 @@
             <div id="player"></div>
         </div>
         <div class="col-md-4 text-center">
+            <h2 id="game-message">PREPARE FOR BATTLE</h2>
             <img src="assets/images/attack-button.png" alt="attack button">
             <div id="attack"></div>
         </div>
