@@ -64,7 +64,7 @@ for (var i=0; i<availableCharacters.length; i++) {
 // DETERMINE PLAYERS SELECTED AND MOVE TO THE DESIGNATED FIGHTING AREA
 
     // Select a Player and Opponent by creating an "on-click" event attached to the ".playerCard" class.
-    $(".playerCard").on("click", function() {
+    $(".playerCard").click(function() {
         $("#gameplay-screen").show();
         if ($("#player-area").is(":empty")) {
             //Set the player object
@@ -94,7 +94,7 @@ for (var i=0; i<availableCharacters.length; i++) {
 //-------------->
 
 // ATTACK FUNCTIONS
-$("#attack").on("click"), function() {
+$("#attack").click(function() {
     //If attack button is pressed with no opponent, messagse shows to user (for before attack)
     if ($("#opponent-area").is(":empty")) {
 		$("#game-message").text("NO OPPONENT HERE!");
@@ -139,6 +139,6 @@ $("#attack").on("click"), function() {
 	if($("opponent-area").is(":empty")) {
 		$("#game-message").text("No Opponent here!");
 	}
-};
+});
 
-})
+});
