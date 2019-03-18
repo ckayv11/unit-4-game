@@ -43,7 +43,7 @@ for (var i=0; i<availableCharacters.length; i++) {
     cardBodyTag.append(nameTag, healthPointTag);
    
     var imageTag = $("<img>");
-    imageTag.addClass("character");
+    imageTag.addClass("card-img-top character");
     imageTag.attr("src", availableCharacters[i].gameImage);
     imageTag.attr("alt", "game character" + [i]);
     imageTag.append(cardBodyTag);

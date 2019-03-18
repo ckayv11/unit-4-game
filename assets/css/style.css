@@ -89,9 +89,8 @@ figure {
     display: none;
 }
 
-.card, .card-body {
+.card, .card-body .card-img-top {
     width: 18rem;
-
 }
 
 #player-area img {
@@ -109,5 +108,15 @@ figure {
 
 #opponent-area img {
     margin-top: 50px;
+}
+
+#enemy-area img {
+    width: 200px;
+    height: 200px;
+}
+
+#enemy-area .card, .card-body {
+    width: 18rem;
+    align-items: center;
 }
 
