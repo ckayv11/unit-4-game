@@ -5,7 +5,6 @@ var thor = {
     healthPoints: 180,
     attackPower: 7,
     counterAttackPower: 10,
-    // isPlayer = false,
 };
 
 var ironMan = {
@@ -14,7 +13,6 @@ var ironMan = {
     healthPoints: 140,
     attackPower: 8,
     counterAttackPower: 15,
-    // isPlayer = false,
 };
 
 var blackWidow = {
@@ -23,7 +21,6 @@ var blackWidow = {
     healthPoints: 110,
     attackPower: 18,
     counterAttackPower: 6,
-    // isPlayer = false,
 };
 
 var hulk = {
@@ -32,7 +29,6 @@ var hulk = {
     healthPoints: 200,
     attackPower: 4,
     counterAttackPower: 20,
-    // isPlayer = false,
 };
 
 var captainAmerica = {
@@ -41,7 +37,6 @@ var captainAmerica = {
     healthPoints: 120,
     attackPower: 12,
     counterAttackPower: 5,
-    // isPlayer = false,
 };
 
 var playersArray = [thor, ironMan, blackWidow, hulk, captainAmerica];
@@ -59,14 +54,15 @@ var endGame = false;
 
 // DYNAMICALLY DISPLAY PLAYERS ON THE STARTING SCREEN
 
-function displayPlayers() {
+// function displayPlayers() {
 
 // Create a for-loop to iterate through the players array.    
 
  for (var i = 0; i < playersArray.length; i++) {
     // Create variables to create divs or tags to assign object 
     var healthPointTag = $("<p>");
-    healthPointTag.text(playersArray[i].healthPoints);
+    healthPointTag.text(playersArray[i].healthPoints + " HP");
+    healthPointTag.attr("data-playerHP", playersArray[i].healthPoints);
     healthPointTag.addClass("card-text");
 
     var nameTag = $("<h3>");
@@ -85,42 +81,69 @@ function displayPlayers() {
     var cardTag = $("<div>");
     cardTag.addClass("card bg-transparent border-0 playerCard");
     cardTag.attr("data-player", playersArray[i]);
+    cardTag.attr("a", playersArray[i]);
     cardTag.append(imageTag, cardBodyTag);
   
     // Append last div or tag to the existing div class from html
     $("#gameCharacters").append(cardTag);
 
     }; 
-}
+// }
 //Execute function to dynamically display players on screen
-displayPlayers()
+// displayPlayers()
 
 //-------------->
+
 
 // DETERMINE PLAYERS SELECTED AND MOVE TO THE DESIGNATED FIGHTING AREA
 
     // Select a Player and Opponent by creating an "on-click" event attached to the ".playerCard" class.
     $(".playerCard").on("click", function() {
         if ($("#player-area").is(":empty")) {
-        player = ($(this).attr("data-player"));
-        player = $(this);
-        $("#player-area").append(player);
-        $("#start-message").text("CHOOSE YOUR OPPONENT");
+            player = ($(this).attr("data-player"));
+            player = $(this);
+            $("#player-area").append(player);
+            $("#start-message").text("CHOOSE YOUR OPPONENT");
+            $("#player-area p").remove(":contains('HP')" );
+            $("#player-health").text(player.name);
+            // $("#player-health").text(player.healthPoints + " HP");
+            $("#starting-div").remove();
+            $("#enemy-area").show();
+            $(".card-deck").appendTo("#enemy-area");
+        }
+        else if ($("#opponent-area").is(":empty")) {
+            opponent = ($(this).attr("data-player"));
+            opponent = $(this);
+            $("#opponent-area").append(opponent);
+            $("#game-message").text("START ATTACKING!")
+            $("#opponent-area p").remove(":contains('HP')" );
         }
         else {
-        opponent = ($(this).attr("data-player"));
-        opponent = $(this);
-        $("#opponent-area").append(opponent);
-        $("#game-message").text("START ATTACKING!")
+            $("#game-message").text("ONE OPPONENET AT A TIME! START ATTACKING!")
         }
-       
     });
 
-
+     
 //-------------->
 
 // ATTACK FUNCTIONS
-
+$("#attack").on("click"), function() {
+    if($("#opponent-area").is(":empty")) {
+		$("#game-message").text("No Opponent here!");
+	} else {
+        playerHP -= player.counterAttackPower;
+        opponentHP -= playerAP;
+        var originalHP = playerAP;
+        playerAP += player.attackPower;
+        if(opponentHP <= 0){ //if defender loses the game
+            OpponentLose();
+        }else if(playerHP <= 0){ //if player loses the game
+            PlayerLose();               
+        }else{ // else print health points and attack detail
+            Attack(originalHP);
+        }
+    }
+};
 
 // RESET FUNCTION
 

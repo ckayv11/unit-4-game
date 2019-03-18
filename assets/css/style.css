@@ -33,6 +33,12 @@ h3 {
     font-size: 30px;
 }
 
+h4 {
+    text-align: center;
+    color: orange;
+    font-size: 30px;
+}
+
 p {
     text-align: center;
     color: black;
@@ -53,6 +59,7 @@ img {
     background-image: url('../images/citybackground.png');
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100%;
 }
 
 figure {
@@ -78,6 +85,11 @@ figure {
     padding-right: 20px;
 }
 
-#fighting-area {
-    padding-bottom: 400px;
+#enemy-area, .win-screen, .lose-screen {
+    display: none;
+}
+
+.card, .card-body {
+    width: 18rem;
+
 }
