@@ -1,72 +1,41 @@
-// PLAYER VARIABLES & VALUES
-var thor = {
-    name: "THOR",
-    image: "assets/images/thor.png",
-    healthPoints: 180,
-    attackPower: 7,
-    counterAttackPower: 10,
-};
+//DEFINE VARIABLES
 
-var ironMan = {
-    name: "IRON MAN",
-    image: "assets/images/ironman.png",
-    healthPoints: 140,
-    attackPower: 8,
-    counterAttackPower: 15,
-};
+var player
+var playerImage
+var playerHP
+var opponentHP
+var playerAP
 
-var blackWidow = {
-    name: "BLACK WIDOW",
-    image: "assets/images/black-widow.png",
-    healthPoints: 110,
-    attackPower: 18,
-    counterAttackPower: 6,
-};
+//Game character object 
+function gameCharacter(name, hP, aP, cA, gImg) {
+	this.name = name;
+	this.healthPoints = hP;
+	this.attackPoints = aP;
+	this.counterAttack = cA;
+	this.gameImage = gImg; 
+	this.isFighter = false;
+}
 
-var hulk = {
-    name: "HULK",
-    image: "assets/images/hulk.png",
-    healthPoints: 200,
-    attackPower: 4,
-    counterAttackPower: 20,
-};
+//Create new characters 
+var thor = new gameCharacter("THOR", 110, 15, 5, "assets/images/thor.png", false);
+var ironMan = new gameCharacter("IRON MAN", 120, 10, 8, "assets/images/ironman.png", false);
+var blackWidow = new gameCharacter("BLACK WIDOW", 160, 3, 18, "assets/images/black-widow.png");
+var hulk = new gameCharacter("HULK", 140, 7, 15, "assets/images/hulk.png", false);
+var captainAmerica = new gameCharacter("CAPTAIN AMERICA", 130, 6, 17, "assets/images/captain-america.png", false);
+//Add new characters to array 
+var availableCharacters = [thor, ironMan, blackWidow, hulk, captainAmerica];
 
-var captainAmerica = {
-    name: "CAPTAIN AMERICA",
-    image: "assets/images/captain-america.png",
-    healthPoints: 120,
-    attackPower: 12,
-    counterAttackPower: 5,
-};
-
-var playersArray = [thor, ironMan, blackWidow, hulk, captainAmerica];
-// GLOBAL VARIABLES 
-var player;
-var opponent;
-var playerHP;
-var opponentHP;
-var playerHealthMeter;
-var opponentHealthMeter;
-var playerAP;
-var opponentAP;
-var noOpponent = true;
-var endGame = false;
-
+$(document).ready(function(){
 // DYNAMICALLY DISPLAY PLAYERS ON THE STARTING SCREEN
-
-// function displayPlayers() {
-
-// Create a for-loop to iterate through the players array.    
-
- for (var i = 0; i < playersArray.length; i++) {
+for (var i=0; i<availableCharacters.length; i++) {
     // Create variables to create divs or tags to assign object 
     var healthPointTag = $("<p>");
-    healthPointTag.text(playersArray[i].healthPoints + " HP");
-    healthPointTag.attr("data-playerHP", playersArray[i].healthPoints);
+    healthPointTag.text(availableCharacters[i].healthPoints + " HP");
+    healthPointTag.attr("data-player", availableCharacters[i]);
     healthPointTag.addClass("card-text");
 
     var nameTag = $("<h3>");
-    nameTag.text(playersArray[i].name);
+    nameTag.text(availableCharacters[i].name);
     nameTag.addClass("card-title");
     // Append each new div or tag to each other for card display
     var cardBodyTag = $("<div>");
@@ -75,22 +44,19 @@ var endGame = false;
    
     var imageTag = $("<img>");
     imageTag.addClass("character");
-    imageTag.attr("src", playersArray[i].image);
+    imageTag.attr("src", availableCharacters[i].gameImage);
+    imageTag.attr("alt", "game character" + [i]);
     imageTag.append(cardBodyTag);
 
     var cardTag = $("<div>");
     cardTag.addClass("card bg-transparent border-0 playerCard");
-    cardTag.attr("data-player", playersArray[i]);
-    cardTag.attr("a", playersArray[i]);
+    cardTag.attr("data-player", availableCharacters[i]);
     cardTag.append(imageTag, cardBodyTag);
-  
+    
     // Append last div or tag to the existing div class from html
     $("#gameCharacters").append(cardTag);
 
-    }; 
-// }
-//Execute function to dynamically display players on screen
-// displayPlayers()
+}
 
 //-------------->
 
@@ -99,27 +65,28 @@ var endGame = false;
 
     // Select a Player and Opponent by creating an "on-click" event attached to the ".playerCard" class.
     $(".playerCard").on("click", function() {
+        $("#gameplay-screen").show();
         if ($("#player-area").is(":empty")) {
+            //Set the player object
             player = ($(this).attr("data-player"));
-            player = $(this);
-            $("#player-area").append(player);
+            myPlayer = $(this);
+            playerHP = player.healthPoints;
+            playerAP = player.attackPoints;
+            $("#player-area").append(myPlayer);
             $("#start-message").text("CHOOSE YOUR OPPONENT");
-            $("#player-area p").remove(":contains('HP')" );
-            $("#player-health").text(player.name);
-            // $("#player-health").text(player.healthPoints + " HP");
-            $("#starting-div").remove();
+            $("#starting-screen").remove();
             $("#enemy-area").show();
             $(".card-deck").appendTo("#enemy-area");
+            
         }
         else if ($("#opponent-area").is(":empty")) {
             opponent = ($(this).attr("data-player"));
-            opponent = $(this);
-            $("#opponent-area").append(opponent);
+            myOpponent = $(this);
+            $("#opponent-area").append(myOpponent);
             $("#game-message").text("START ATTACKING!")
-            $("#opponent-area p").remove(":contains('HP')" );
         }
         else {
-            $("#game-message").text("ONE OPPONENET AT A TIME! START ATTACKING!")
+            $("#game-message").text("ONE OPPONENT AT A TIME! START ATTACKING!")
         }
     });
 
@@ -128,77 +95,50 @@ var endGame = false;
 
 // ATTACK FUNCTIONS
 $("#attack").on("click"), function() {
-    if($("#opponent-area").is(":empty")) {
-		$("#game-message").text("No Opponent here!");
-	} else {
-        playerHP -= player.counterAttackPower;
-        opponentHP -= playerAP;
-        var originalHP = playerAP;
-        playerAP += player.attackPower;
-        if(opponentHP <= 0){ //if defender loses the game
-            OpponentLose();
-        }else if(playerHP <= 0){ //if player loses the game
-            PlayerLose();               
-        }else{ // else print health points and attack detail
-            Attack(originalHP);
-        }
+    //If attack button is pressed with no opponent, messagse shows to user (for before attack)
+    if ($("#opponent-area").is(":empty")) {
+		$("#game-message").text("NO OPPONENT HERE!");
     }
+    else {
+        //Opponent loses points
+        opponentHP = opponentHP - playerAP;
+        //Player loses points from counter-attack
+        playerHP = playerHP - opponent.counterAttackPower;
+        $("#game-messsage").text(player.name + " hit " + opponent.name + " for " + playerAP + " damage and " + opponent.name + " hit back with " + opponent.counterAttackPower + " damage.");
+    }
+    //Get rid of opponent if defeated
+    if(opponentHP <= 0) {
+		//empty fighting area
+		$("#opponent-area").empty();
+		//reset enemy
+		opponent = "";
+		// //reset health
+		// $("#enemy-health").text("");
+		//update onscreen message
+		$("#game-message").text("You defeated your opponent!");
+		//check if anymore enemies left
+		if($("#opponent-area").is(":empty")) {
+		    //pause starting music
+            $("#fightsong").trigger("pause");
+            //start battle music
+            $("#victorysong").trigger("play");
+			//move player to win screen
+			$("#player-win").append(player);
+			//show win screen 
+			$(".win-screen").show();
+		} 
+    }
+    if (playerHP <= 0) {
+        //Player loses if health drops below zero
+            //pause starting music
+            $("#fightsong").trigger("pause");
+            //start battle music
+            // $("#losersong").trigger("play");
+    }
+    //If attack button is pressed with no enemy, messagse shows to user (for after attack)
+	if($("opponent-area").is(":empty")) {
+		$("#game-message").text("No Opponent here!");
+	}
 };
-
-// RESET FUNCTION
-
-
-// CHECK TO SEE IF PLAYER WON
-
-    // If won...then
-
-
-    // If lost...then
-
-
-
-// WHEN IT'S A TIE ATTACK
-
-
-
-// EXECUTE CODE AND ON CLICK
-
-// call start game function
-
-$(document).ready(function(){
-    // display all players
-    
-
-    // handle click event when one player is clicked 
-
-        //save my player's info
-
-   
-        //display the enemies
-
-
-    // handle click event when one opponent is clicked
-   
-        //if there is no opponent, define it and display
-      
-
-
-
-    // handle when player attacks (use if/else)
-
-            // reduce player's and opponents's health point  
-   
-
-            //increase player's attack power
-
-
-            // do this if defender loses the game else
-            
-            //if player loses the game, do this
-                     
-            // else print health points and attack detail
-
-
-    // When restart button is clicked, restart game.
 
 })

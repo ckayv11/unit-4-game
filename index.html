@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,7 +14,7 @@
 
 <body>
    
-   <section id="starting-screen">
+   <section id="main">
    
     <div class="jumbotron jumbotron-fluid bg-danger text-center text-white mb-1">
        <h1>MARVEL MANIA</h1>
@@ -23,7 +23,7 @@
     <div class="container">
 
 <!-- STARTING SCREEN: CHOOSE PLAYER -->
-        <div class="row" id="starting-div">
+        <div class="row" id="starting-screen">
            <div class="col-md-12 text-center mb-5">
               <h2 id="start-message"><i class="fas fa-angle-double-right"></i> SELECT A PLAYER TO GET STARTED</h2>
            </div>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="health-meter">
+            <div class="opponent-health-meter">
                 <figure id="opponent-health">PLAYER 2</figure>
             </div>
         </div>
@@ -58,9 +58,9 @@
             <div id="player-area"></div>
             <div id="player"></div>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 text-center" id="attack">
             <h4 id="game-message">PREPARE FOR BATTLE</h4>
-            <img id="attack" src="assets/images/attack-button.png" alt="attack button">
+            <button><p>ATTACK</p></button>
         </div>
         <div class="col-md-4">
             <div id="opponent-area"></div>
@@ -84,29 +84,23 @@
 	<!--Win Screen-->
 	<section class="win-screen">
 		<h2>You Win!</h2>
-		<div id="character-win"></div>
+		<div id="player-win"></div>
 	</section>
 	<!--Lose Screen-->
 	<section class="lose-screen">
 		<h2>You Lose</h2>
-		<div id="character-lose"></div>
+		<div id="player-lose"></div>
 	</section>
 
 <!-- AUDIO -->
-  <div>
-     <audio id="themesong" autoplay loop>
-        <source src="assets/audio/marveltheme.mp3" type="audio/mp3">
-     </audio>
-     <audio id="fightsong" loop>
-        <source src="assets/audio/marveltheme.mp3" type="audio/mp3">
-     </audio>
-     <audio id="victorysong" loop>
-        <source src="assets/audio/marveltheme.mp3" type="audio/mp3">
-     </audio>
-     <audio id="losersong" loop>
-        <source src="assets/audio/marveltheme.mp3" type="audio/mp3">
-     </audio>
-  </div>
+	<div>
+		<audio id="fightsong" autoplay loop>
+			<source src="assets/audio/knights-cydonia.mp3" type="audio/mp3">
+		</audio>
+		<audio id="victorysong" loop>
+			<source src="assets/audio/marveltheme.mp3" type="audio/mp3">
+		</audio>
+	</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/game.js"></script>
