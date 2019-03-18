@@ -104,23 +104,23 @@ $("#attack").on("click"), function() {
         opponentHP = opponentHP - playerAP;
         //Player loses points from counter-attack
         playerHP = playerHP - opponent.counterAttackPower;
-        $("#game-messsage").text(player.name + " hit " + opponent.name + " for " + playerAP + " damage and " + opponent.name + " hit back with " + opponent.counterAttackPower + " damage.");
+        $("#game-messsage").text(player.name + " HIT " + opponent.name + " FOR " + playerAP + " DAMAGE AND " + opponent.name + " HIT BACK WITH " + opponent.counterAttackPower + " DAMAGE.");
     }
     //Get rid of opponent if defeated
     if(opponentHP <= 0) {
 		//empty fighting area
 		$("#opponent-area").empty();
-		//reset enemy
+		//reset opponent
 		opponent = "";
 		// //reset health
-		// $("#enemy-health").text("");
+		// $("#opponent-health").text("");
 		//update onscreen message
-		$("#game-message").text("You defeated your opponent!");
-		//check if anymore enemies left
+		$("#game-message").text("YOU DEFEATED YOUR OPPONENT!");
+		//check if anymore opponents left
 		if($("#opponent-area").is(":empty")) {
 		    //pause starting music
             $("#fightsong").trigger("pause");
-            //start battle music
+            //start victory music
             $("#victorysong").trigger("play");
 			//move player to win screen
 			$("#player-win").append(player);
@@ -132,7 +132,7 @@ $("#attack").on("click"), function() {
         //Player loses if health drops below zero
             //pause starting music
             $("#fightsong").trigger("pause");
-            //start battle music
+            //start losing music (need to get)
             // $("#losersong").trigger("play");
     }
     //If attack button is pressed with no enemy, messagse shows to user (for after attack)

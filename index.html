@@ -16,27 +16,30 @@
    
    <section id="main">
    
-    <div class="jumbotron jumbotron-fluid bg-danger text-center text-white mb-1">
-       <h1>MARVEL MANIA</h1>
+    <div class="row" id="header">
+        <div class="col-md-12 text-center mt-4">
+          <h1>MARVEL MANIA</h1>
+        </div>
     </div>
 
     <div class="container">
 
 <!-- STARTING SCREEN: CHOOSE PLAYER -->
         <div class="row" id="starting-screen">
-           <div class="col-md-12 text-center mb-5">
+           <div class="col-md-12 text-center my-3">
               <h2 id="start-message"><i class="fas fa-angle-double-right"></i> SELECT A PLAYER TO GET STARTED</h2>
            </div>
         </div>
 
         <div class="row">
-           <div class="card-deck" id="gameCharacters"><a href="#enemy-area"></a></div>
+           <div class="card-deck mt-5" id="gameCharacters"></div>
         </div>
     
     </section>
 
-  <section id="gameplay-screen">
-<!-- HEALTH METER -->
+<!-- GAMEPLAY SCREEN -->
+    <section id="gameplay-screen">
+
     <div class="row">
         <div class="col-md-6">
             <div class="health-meter">
@@ -56,18 +59,16 @@
     <div class="row" id="fighting-area">
         <div class="col-md-4">
             <div id="player-area"></div>
-            <div id="player"></div>
         </div>
         <div class="col-md-4 text-center" id="attack">
             <h4 id="game-message">PREPARE FOR BATTLE</h4>
-            <button><p>ATTACK</p></button>
+            <img src="assets/images/attack-button.png" alt="attack button">
         </div>
         <div class="col-md-4">
             <div id="opponent-area"></div>
-            <div id="opponent"></div>
         </div>
     </div>
-</section>
+    </section>
 
     <!--Enemy Waiting Area-->
 
@@ -75,10 +76,9 @@
         <div class="col-md-12 text-center mt-3">
             <div id="enemy-area"></div>		
             <h2 id="your-enemies"><i class="fas fa-angle-double-right"></i> CHOOSE YOUR OPPONENT</h2>
-            <a href="#fighting-area"></a>
         </div>
     </div>
-  
+
 <!-- END GAME-->
       
 	<!--Win Screen-->

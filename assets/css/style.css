@@ -3,15 +3,11 @@
     src: url('../fonts/Marvel-Regular.ttf')
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: myFirstFont;
 }
 
-.jumbotron {
+#header {
     font-family: myFirstFont;
     background-image: url('../images/marvelwallpaper.png');
     background-size: cover;
@@ -20,6 +16,7 @@ body {
 
 h1 {
     font-size: 100px;
+    color: white;
 }
 
 h2 {
@@ -72,7 +69,7 @@ figure {
 
 #player-health {
 	width: 100%;
-	background: darkgreen;
+	background: black;
 	color: white;
 	justify-content: flex-start;
 	display: flex;
@@ -107,10 +104,10 @@ figure {
 
 #player-area .card {
     margin-left: 150px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 #opponent-area img {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
