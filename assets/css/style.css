@@ -91,6 +91,7 @@ figure {
 
 .card, .card-body .card-img-top {
     width: 18rem;
+    align-items: center;
 }
 
 #player-area img {
